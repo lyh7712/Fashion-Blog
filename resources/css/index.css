@@ -1,0 +1,11 @@
+h1 {
+    color: blue;
+}
+
+.clicked {
+    color: brown;
+}
+
+.font-style {
+    font-family: 'Courier New', Courier, monospace;
+}
