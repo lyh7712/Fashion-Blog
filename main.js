@@ -3,6 +3,7 @@ const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
 
 const HIDDEN_CLASSNAME = "hidden";
+const USERNAME_KEY = "username";
 
 function handleLoginSubmit(event) {
     event.preventDefault();
@@ -11,15 +12,21 @@ function handleLoginSubmit(event) {
 
     loginForm.classList.add(HIDDEN_CLASSNAME);
 
-    greeting.innerText = `Hello ${userName}`;
+    localStorage.setItem(USERNAME_KEY, userName);
 
-    if (localStorage.getItem("username") === undefined) {
-        localStorage.setItem("username", userName);
-    } else {
-        // form을 지우고 user를 보여준다.
-    }
-
-    greeting.classList.remove(HIDDEN_CLASSNAME);
+    handleGreetings(userName);
 }
 
-loginForm.addEventListener("submit", handleLoginSubmit);
+const handleGreetings = (userName) => {
+    greeting.classList.remove(HIDDEN_CLASSNAME);
+    greeting.innerText = `Hello ${userName}`;
+};
+
+const savedUserName = localStorage.getItem(USERNAME_KEY);
+
+if (savedUserName === null) {
+    loginForm.classList.remove(HIDDEN_CLASSNAME);
+    loginForm.addEventListener("submit", handleLoginSubmit);
+} else {
+    handleGreetings(savedUserName);
+}
