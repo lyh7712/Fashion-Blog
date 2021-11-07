@@ -1,14 +1,16 @@
-.container {
+.father {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
   height: 100vh;
 }
 
-.box {
+.child {
   background-color: blue;
   width: 100px;
   height: 100px;
   color: white;
+}
+
+.child:nth-child(2) {
+  order: 1;
 }
